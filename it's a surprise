@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Suman Surprise</title>
+
+<style>
+    body {
+        background: linear-gradient(135deg, #ff9acb, #ffccd5);
+        height: 100vh;
+        margin: 0;
+        font-family: 'Poppins', sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .card {
+        background: white;
+        width: 90%;
+        max-width: 450px;
+        padding: 25px;
+        border-radius: 20px;
+        box-shadow: 0 8px 30px rgba(255, 0, 100, 0.3);
+        text-align: center;
+    }
+
+    .subtitle {
+        color: #d63384;
+        margin-bottom: 20px;
+    }
+
+    .start-btn {
+        padding: 12px 22px;
+        background: #ff4fa8;
+        border: none;
+        color: white;
+        border-radius: 30px;
+        font-size: 18px;
+        cursor: pointer;
+    }
+
+    .start-btn:hover {
+        background: #ff2e8d;
+    }
+
+    .hidden {
+        display: none;
+    }
+
+    .game {
+        margin-top: 20px;
+    }
+
+    .heart {
+        font-size: 35px;
+        position: relative;
+        display: inline-block;
+        cursor: pointer;
+    }
+
+    .message-box {
+        margin-top: 20px;
+        background: #ffe6f3;
+        padding: 15px;
+        border-radius: 15px;
+    }
+
+    .wish {
+        color: #c2185b;
+        font-size: 15px;
+    }
+</style>
+</head>
+
+<body>
+
+    <div class="card">
+        <h1>💗 Happy Day, Suman! 💗</h1>
+        <p class="subtitle">A small surprise made just for you 🎀</p>
+
+        <button class="start-btn" onclick="startGame()">Start Mini Game 🎮</button>
+
+        <div id="game" class="game hidden">
+            <p class="game-text">Catch the 💖 in 5 seconds!</p>
+            <div id="heart" class="heart">💖</div>
+            <p id="timer">Time: 5</p>
+            <p id="score">Score: 0</p>
+        </div>
+
+        <div id="message" class="hidden message-box">
+            <h2>🎉 Yay Suman! 🎉</h2>
+            <p>You finished the game… now your surprise message 💌</p>
+
+            <p class="wish">
+                Dear Suman,<br><br>
+                You're that one friend who brings calmness, chaos,
+                and comfort all together in the most perfect way 💗  
+                Just wanted to remind you that you're incredibly special —
+                today and every single day ✨  
+                Keep smiling and keep shining, Suman 💝  
+                <br><br>— With love, from your friend 💗
+            </p>
+        </div>
+
+    </div>
+
+<script>
+let score = 0;
+let timeLeft = 5;
+let timerInterval;
+
+function startGame() {
+    document.querySelector(".start-btn").classList.add("hidden");
+    document.getElementById("game").classList.remove("hidden");
+
+    timerInterval = setInterval(() => {
+        timeLeft--;
+        document.getElementById("timer").innerText = "Time: " + timeLeft;
+
+        if (timeLeft === 0) {
+            endGame();
+        }
+    }, 1000);
+
+    const heart = document.getElementById("heart");
+    heart.addEventListener("click", () => {
+        score++;
+        document.getElementById("score").innerText = "Score: " + score;
+
+        heart.style.top = Math.random() * 150 + "px";
+        heart.style.left = Math.random() * 150 + "px";
+    });
+}
+
+function endGame() {
+    clearInterval(timerInterval);
+    document.getElementById("game").classList.add("hidden");
+    document.getElementById("message").classList.remove("hidden");
+}
+</script>
+
+</body>
+</html>
